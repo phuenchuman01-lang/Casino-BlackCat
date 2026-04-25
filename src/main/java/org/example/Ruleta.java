@@ -18,18 +18,17 @@ public class Ruleta {
     }
 
     public static void menu() {
-        // Abrimos el Scanner aquí para usarlo en todo el menú
         Scanner in = new Scanner(System.in);
         int opcion = 0;
 
         do {
             mostrarMenu();
-            opcion = leerOpcion(in); // Leemos lo que teclea el usuario
-            ejecutarOpcion(opcion, in); // Ejecutamos la jugada
-        } while (opcion != 3); // El 3 es la opción para salir
+            opcion = leerOpcion(in);
+            ejecutarOpcion(opcion, in);
+        } while (opcion != 3);
 
         System.out.println("¡Gracias por visitar el Casino Black Cat! Don Donnie te despide.");
-        in.close(); // Siempre es buena práctica cerrar el Scanner al terminar
+        in.close();
     }
 
     public static void mostrarMenu() {
@@ -48,43 +47,30 @@ public class Ruleta {
         switch (opcion) {
             case 1:
                 System.out.println("\n--- INICIANDO APUESTA ---");
-                iniciarRonda(in); // Llama a la función del juego
+                iniciarRonda(in);
                 break;
             case 2:
                 System.out.println("\n--- ESTADÍSTICAS ---");
-                mostrarEstadisticas(); // Llama a la función de estadísticas
+                mostrarEstadisticas();
                 break;
             case 3:
-                // No hacemos nada aquí porque el mensaje de despedida ya está en menu()
                 break;
             default:
-                // Si el jugador teclea un 4, un 9 o cualquier otro número
                 System.out.println("Opción no válida. Por favor, elige 1, 2 o 3.");
                 break;
         }
     }
 
     public static void iniciarRonda(Scanner in) {
-        // 1. Usamos la función que creaste para pedir el tipo de apuesta
         char tipoApuesta = leerTipoApuesta(in);
 
-        // 2. Pedimos el dinero (¡es un casino después de todo!)
         System.out.print("Ingresa el monto de tu apuesta: $");
         int monto = in.nextInt();
 
-        // 3. Hacemos girar la ruleta con tu otra función
         System.out.println("\n🎲 ¡La ruleta está girando...!");
         int numeroGanador = girarRuleta();
-
-        // TODO: Falta evaluar si ganamos o perdimos (lo haremos en el siguiente paso)
-
-        // 4. El juez decide
         boolean ganaste = evaluarResultado(numeroGanador, tipoApuesta);
-
-        // 5. Mostramos el resultado
         mostrarResultado(numeroGanador, tipoApuesta, monto, ganaste);
-
-        // 6. Guardamos la jugada en los libros de contabilidad
         registrarResultado(numeroGanador, monto, ganaste);
     }
 
@@ -92,18 +78,14 @@ public class Ruleta {
         System.out.println("¿A qué le vas a apostar?");
         System.out.println("(R) Rojo | (N) Negro | (P) Par | (I) Impar");
         System.out.print("Ingresa la letra de tu apuesta: ");
-
-        // Leemos la palabra, la pasamos a mayúsculas y nos quedamos con la primera letra
         return in.next().toUpperCase().charAt(0);
     }
 
     public static int girarRuleta() {
-        // Genera un número aleatorio desde 0 hasta 36 (el 37 es el límite superior excluido)
         return rng.nextInt(37);
     }
 
     public static boolean evaluarResultado(int numero, char tipo) {
-        // Regla de oro de la ruleta: Si sale 0, las apuestas sencillas pierden
         if (numero == 0) {
             return false;
         }
