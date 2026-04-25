@@ -163,29 +163,24 @@ public class Ruleta {
 
         int totalApostado = 0;
         int totalAciertos = 0;
-        int balanceNeto = 0; // Ganancia o pérdida total
-
-        // Un ciclo 'for' que revisará la libreta de contabilidad línea por línea
+        int balanceNeto = 0; 
         for (int i = 0; i < historialSize; i++) {
             int apuestaActual = historialApuestas[i];
-            totalApostado += apuestaActual; // Sumamos el dinero al pozo total
+            totalApostado += apuestaActual;
 
             if (historialAciertos[i] == true) {
-                totalAciertos++; // Sumamos un acierto
-                balanceNeto += apuestaActual; // Ganó, suma la apuesta a su bolsillo
+                totalAciertos++; 
+                balanceNeto += apuestaActual; 
             } else {
-                balanceNeto -= apuestaActual; // Perdió, resta la apuesta de su bolsillo
+                balanceNeto -= apuestaActual; 
             }
         }
-
-        // Calculamos el porcentaje. Ponemos (double) para que no nos borre los decimales.
         double porcentajeAcierto = ((double) totalAciertos / historialSize) * 100;
 
-        // Imprimimos el reporte final
         System.out.println("Rondas jugadas: " + historialSize);
         System.out.println("Total apostado: $" + totalApostado);
         System.out.println("Total de aciertos: " + totalAciertos);
-        System.out.printf("Porcentaje de acierto: %.2f%%\n", porcentajeAcierto); // %.2f muestra solo 2 decimales
+        System.out.printf("Porcentaje de acierto: %.2f%%\n", porcentajeAcierto);
 
         if (balanceNeto > 0) {
             System.out.println("Ganancia neta: +$" + balanceNeto + " (¡Le ganaste al casino!)");
