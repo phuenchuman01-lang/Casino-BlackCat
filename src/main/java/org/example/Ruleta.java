@@ -94,18 +94,17 @@ public class Ruleta {
             case 'R':
                 return esRojo(numero);
             case 'N':
-                return !esRojo(numero); // Si NO es rojo (y ya sabemos que no es 0), es negro
+                return !esRojo(numero);
             case 'P':
-                return numero % 2 == 0; // Es par si el residuo entre 2 es 0
+                return numero % 2 == 0; 
             case 'I':
-                return numero % 2 != 0; // Es impar si hay residuo
+                return numero % 2 != 0;
             default:
                 return false;
         }
     }
 
     public static boolean esRojo(int n) {
-        // Recorremos el arreglo de números rojos
         for (int rojo : numerosRojos) {
             if (n == rojo) {
                 return true; // Si lo encuentra, es rojo
